@@ -11,4 +11,7 @@
     @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
 }
 @await Html.GetBlockGridHtmlAsync(Model!.Layout)
+@await Html.GetBlockGridHtmlAsync(Model.LetUsKnowSection)
+
+
 @await Html.GetBlockListHtmlAsync(Model.ContactForm)
