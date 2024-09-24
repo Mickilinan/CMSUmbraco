@@ -304,7 +304,21 @@ header .nav-link {
 .bg-dark {
     background-color: var(--color-dark);
 }
+.bg-primary {
+    background-color: var(--color-primary);
+}
 
+.bg-secondary {
+    background-color: var(--color-secondary);
+}
+
+.bg-dark {
+    background-color: var(--color-dark);
+}
+
+.bg-light {
+    background-color: var(--color-light);
+}
 
 h1 {
     color: var(--color-primary)
@@ -350,3 +364,5 @@ h6 {
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
+
+

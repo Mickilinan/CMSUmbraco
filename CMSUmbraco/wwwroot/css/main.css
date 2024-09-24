@@ -17,7 +17,9 @@ html, body, section, div, header, footer, main, aside, nav, blockquote {
 }
 
 img, svg {
-    vertical-align: middle
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
 }
 
 body {
@@ -27,6 +29,8 @@ body {
     font-size: 16px;
     color: #535656
 }
+
+
 
 /*.wrapper {
     display: grid;
@@ -190,13 +194,14 @@ header {
     padding: 2rem 0; 
     position: relative;
     overflow: hidden;
+    
 }
 
-  /*  .full-width-section .container {
+    .full-width-section .container {
         max-width: 1200px; 
         margin: 0 auto;
         padding: 0 1rem; 
-    }*/
+    }
 
     .full-width-section .background-image {
         position: absolute;
@@ -204,12 +209,12 @@ header {
         left: 0;
         width: 100%;
         height: 100%;
-        /*object-fit:cover;*/
+        object-fit:cover;
         background-position: center;
         z-index: -1; 
     }
 
-/*.spacing-top {
+.spacing-top {
     padding-top: 2rem;  
 }
 
@@ -217,11 +222,45 @@ header {
     padding-bottom: 2rem;  
 }
 
-.bg-color-class {  
+/*.bg-color-class {  
     background-color: #f0f0f0;   
 }*/
+.page-title {
+    padding: 60px 0;
+    color: var(--color-primary);
+    background-size: cover;
+    text-align: center;
+}
 
+.breadcrumb {
+    display:flex;
+    justify-content: center;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    padding: 0 5px;
+    color: var(--color-primary-dark);
+}
+.breadcrumb-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+    /*font-weight: 500;*/
+}
+
+.breadcrumb-item a:hover {
+    /*color: var(--color-secondary);*/
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--color-secondary);
+    font-weight:bold;
+}
 
 main {
     flex: 1;

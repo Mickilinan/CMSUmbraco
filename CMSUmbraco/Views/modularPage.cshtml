@@ -1,17 +1,32 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ModularPage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
 @{
+
     Layout = "mainLayout.cshtml";
-    // ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+    var servicesPage = Model.Value<IPublishedContent>("contentPicker");   
+    var selection = servicesPage?.ChildrenOfType("serviceItemTemplate").Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+    
+
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Title))
 {
-    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+    <div class="page-title">@ViewBag.Title</div>
+    @await Html.PartialAsync("partials/static/breadCrumb.cshtml")
+    
 }
-@await Html.GetBlockGridHtmlAsync(Model!.Layout)
-@await Html.GetBlockGridHtmlAsync(Model.LetUsKnowSection)
 
 
-@await Html.GetBlockListHtmlAsync(Model.ContactForm)
+    
+    @await Html.GetBlockGridHtmlAsync(Model!.Layout)
+    @await Html.GetBlockGridHtmlAsync(Model.LetUsKnowSection)
+    
+    @* @await Html.PartialAsync("partials/static/ContactForm.cshtml") *@
+    @* @await Html.PartialAsync("partials/blocklist/ServiceList", selection) *@
+
+

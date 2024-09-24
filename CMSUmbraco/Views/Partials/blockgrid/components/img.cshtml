@@ -1,12 +1,17 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;   
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels; 
+@using Umbraco.Cms.Core.Media;
 
 @{
     var selectedImage = Model?.Content.Value<IPublishedContent>("selectedImage")?.Url() ?? null;
     var imageDescription = Model?.Content.Value<string>("imageDescription") ?? "";
+
+    var imageWidth = Model?.Content.Value<int>("imageWidth") ?? 0;
+    var imageHeight = Model?.Content.Value<int>("imageHeight") ?? 0; 
 }
 
-@if (!string.IsNullOrEmpty(selectedImage)){
-<img src="@selectedImage" alt="@imageDescription">
+@if (!string.IsNullOrEmpty(selectedImage))
+{
+    <img src="@selectedImage" alt="@imageDescription" width="@imageWidth" height="@imageHeight">
 }

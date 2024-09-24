@@ -16,26 +16,29 @@
     var homePageDisplayName = "home";
     var isFirstItem = true;
 
+    var backgroundImage = Model.Value<IPublishedContent>("backgroundImage")?.Url();
+
 }
 
-<section class ="page-title">
+<section class ="page-title" style="background-image: url('@backgroundImage');">
     <div class="container">
+
         <h1>@ViewBag.Title</h1>
 
 
         @if (selection?.Length > 0)
 {
     <ul class="breadcrumb">
-        @* For each page in the ancestors collection which have been ordered by Level (so we start with the highest top node first) *@
+        
         @foreach (var item in selection.OrderBy(x => x.Level))
         {
             var displayName = isFirstItem ? homePageDisplayName : item.Name;
-            <li><a href="@item.Url(PublishedUrlProvider)">@displayName</a> </li>
+            <li class="breadcrumb-item"><a href="@item.Url(PublishedUrlProvider)">@displayName</a> </li>
             isFirstItem = false;
         }
 
-        @* Display the current page as the last item in the list *@
-        <li class="active">@Model.Name</li>
+        
+        <li class="breadcrumb-item active">@Model.Name</li>
     </ul>
 }
 

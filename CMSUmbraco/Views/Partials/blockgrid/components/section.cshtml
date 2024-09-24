@@ -17,7 +17,7 @@
 }    
 
 
-<section id="@sectionId" class="@spacingTopClass spacingBottomClass">
+<section id="@sectionId" class="full-width-section @backgroundColorClass">
 
     @if (string.IsNullOrEmpty(backgroundColorClass))
     {
@@ -26,12 +26,24 @@
 
 
 
-    <div class="container @centerContentClass">
+   @*  <div class="container @centerContentClass">
 
     @if(!string.IsNullOrEmpty(sectionBackgroundImage))
     {
         <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
     }
+        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+    </div> *@
+
+
+    @if (!string.IsNullOrEmpty(sectionBackgroundImage))
+    {
+
+        <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+    }
+
+
+    <div class="container @centerContentClass">
         @await Html.GetBlockGridItemAreasHtmlAsync(Model)
     </div>
 </section>
