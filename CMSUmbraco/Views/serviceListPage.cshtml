@@ -9,41 +9,48 @@
     .Where(x => x.IsVisible());
 }
 
-@await Html.PartialAsync("partials/blocklist/serviceList", selection)
 
-@* <section id="our-services">
+<section id="our-services">
 	<div class="container">
-		@if (!string.IsNullOrEmpty(Model.Value("customHeadline").ToString())){
+		@if (!string.IsNullOrEmpty(Model.Value("customHeadline").ToString()))
+		{
 			<div class="headline">
 				<h2 class="title">@Model.Value("customHeadline")</h2>
 			</div>
 		}
 		<div class="services">
-			@foreach (var item in selection){
+			@foreach (var item in selection)
+			{
+
 				var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+
 				var preamble = item?.Value<string>("preamble") ?? "";
 
-					<a href="@item.Url()">
-						<div class="item">
-							<div class="header">
-								<h4>@item.Name()</h4>
+				<a href="@item.Url()">
+					<div class="item">
+						<div class="header">
+							<h4>@item.Name()</h4>
 						</div>
 						<div class="body">
 							<img src="@image" alt="@item.Name()">
 						</div>
-						<div class="footer">
+						<div class=preamble>
 							<p>@preamble</p>
 						</div>
-						</div>
+					</div>
 
-					</a>
+				</a>
 
 
 			}
-			</div>
+		</div>
 	</div>
-	</div>
-</section> *@
+
+</section>
+
+@* 
+@await Html.PartialAsync("partials/blocklist/serviceList", selection) *@
+
 
 
 

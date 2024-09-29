@@ -1,0 +1,29 @@
+﻿
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var settingsPage = Umbraco.Content(Guid.Parse("8ac6d860-0a81-48ab-85ac-1a646bf08425"));
+
+    
+    var supportText = settingsPage?.Value<string>("supportText") ?? "Default support text";
+    var onlineSupportText = settingsPage?.Value<string>("onlineSupportText") ?? "Default online support text";
+    var supportEmail = settingsPage?.Value<string>("supportEmail") ?? "example@example.com";
+
+
+}
+
+
+    <div class="support-box">
+        <p class="headline">@supportText</p>
+        <p>@onlineSupportText</p>
+        <form>
+            <div class="input-wrapper">
+                <input type="email" placeholder="Email address" value=@supportEmail />
+                <span class="icon"><i class="fas fa-envelope"></i></span>
+            </div>
+        </form>
+    </div>
+
+

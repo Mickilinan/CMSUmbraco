@@ -3,10 +3,41 @@
 @{
 	Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Name;
+
+    var recentProjects = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
+        .ChildrenOfType("projectsItemTemplate")
+        .OrderByDescending(x => x.CreateDate)
+        .Take(5);
+
+    var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
+
+    var supportEmail = Model?.Value<string>("supportEmail") ?? "";
 }
 
 <section class="project-details">
-    <div class="container">
-        @Model.Value("pageContent")
+    <div class="container project-container">
+        <div class="main-content">
+            @Model.Value("pageContent")
+        </div>
+
+      
+        <aside class="sidebar">
+           
+            <div class="recent-projects">
+                <h4>Recent Projects</h4>
+                <ul>
+                    @foreach (var project in recentProjects)
+                    {
+                        <li>
+                            <a href="@project.Url()">@project.Name</a>
+                            <span>@project.CreateDate.ToString("MMMM d, yyyy")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+           
+           @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
+        </aside>
     </div>
 </section>

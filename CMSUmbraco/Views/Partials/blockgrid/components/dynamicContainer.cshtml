@@ -8,19 +8,26 @@
     var spacingBottomClass = (Model!.Content.Value<bool>("addSpaceToBottom")) ? "spacing-bottom" : "";
     var centerContentClass = (Model!.Content.Value<bool>("centerContentOnPage")) ? "center" : "";
     var sectionTitle = Model?.Content.Value<string>("sectionTitle") ?? "";
-    var sectionBackgroundColorLabel = Model?.Content?.Value<ColorPickerValueConverter.PickedColor>("sectionBackgroundColor")?.Label.ToLower() ?? null;
-    var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+    var colorLabel = Model?.Content?.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(colorLabel) && colorLabel != "none") ? $"bg-{colorLabel}" : "";
     var sectionBackgroundImage = Model?.Content.Value<IPublishedContent>("sectionBackgroundImage")?.Url() ?? null;
+    var dynamicImageContainer = Model?.Content.Value<IPublishedContent>("dynamicImageContainer")?.Url() ?? null;
 }
 
 <div class="@backgroundColorClass @centerContentClass">
     @await Html.PartialAsync("blockgrid/Components/img")
     @await Html.GetBlockGridItemAreasHtmlAsync(Model)
 </div>
-@if (!string.IsNullOrEmpty(sectionBackgroundImage))
+@* @if (!string.IsNullOrEmpty(sectionBackgroundImage))
 {
 
     <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+} *@
+
+@if (!string.IsNullOrEmpty(dynamicImageContainer))
+{
+
+    <img class="background-image" src="@dynamicImageContainer" alt="@sectionTitle background image" />
 }
 
 

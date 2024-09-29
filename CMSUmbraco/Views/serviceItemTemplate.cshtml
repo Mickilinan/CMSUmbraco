@@ -3,10 +3,40 @@
 @{
 	Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Name;
+
+        var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
+
+    var supportEmail = Model?.Value<string>("supportEmail") ?? "";
 }
+
+@* <section class="service-details">
+    <div class="container">
+        <div class="servicesPage-Title">
+            <a href="@Model.Url()">@Model.Name</a>
+        </div>
+        @Model.Value("pageContent")
+    </div>
+</section> *@
 
 <section class="service-details">
     <div class="container">
-        @Model.Value("pageContent")
+        <div class="servicesPage-Title">
+            <a href="@Model.Url()">@Model.Name</a>
+        </div>
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                
+                <div class="about-us">
+                   
+                    @Model.Value("sidebarContent")
+                </div>
+                
+                @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
+            </aside>
+            <div class="content">
+                <!-- Huvudinnehåll för service-item -->
+                @Model.Value("pageContent")
+            </div>
+        </div>
     </div>
 </section>

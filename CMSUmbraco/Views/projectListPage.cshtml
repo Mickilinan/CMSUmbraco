@@ -1,49 +1,140 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "mainLayout.cshtml";
-	ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+    Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+   var itemsPerPage = 3;
 
 
-	var selection = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
+var selection = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
     .ChildrenOfType("projectsItemTemplate")
     .Where(x => x.IsVisible());
 
 
+    if (!int.TryParse(Context.Request.Query["page"],out int currentPage)) 
+     currentPage = 1;
 
-	
+
+
+ var totalItems = selection?.Count() ?? 0;
+
+ var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+
+    var totalProjects = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
+      .ChildrenOfType("projectsItemTemplate")
+        .Where(x => x.IsVisible())
+        .Count();
+
+
+
+    var tags = Model?.Value<IEnumerable<string>>("tags") ?? Enumerable.Empty<string>();
+
+    
+
+    var recentProjects = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
+        .ChildrenOfType("projectsItemTemplate")
+        .OrderByDescending(x => x.CreateDate)
+        .Take(5);
+
+    var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
+    var supportEmail = Model?.Value<string>("supportEmail") ?? "";
 }
 
 
-<section id="our-services">
-	<div class="container">
-
-		<div class="services">
-			@foreach (var item in selection){
-				var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
-				var preamble = item?.Value<string>("preamble") ?? "";
-
-					<a href="@item.Url()">
-						<div class="item">
-							<div class="header">
-								<h4>@item.Name()</h4>
-						</div>
-						<div class="body">
-							<img src="@image" alt="@item.Name()">
-						</div>
-						<div>
-							<p>@preamble</p>
-						</div>
-						</div>
-
-					</a>
+<section id="our-projects">
+    <div class="project-container">
+        <div class="main-content">
+            <div class="projects">
+                @foreach (var item in pagedItems)
+                {
+                    var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                    var preamble = item?.Value<string>("preamble") ?? "";
+                    var createDate = item?.CreateDate.ToString("MMMM d, yyyy") ?? "";
 
 
-			}
-			</div>
-	</div>
-	</div>
+                    <div class="item">
+                        <a href="@item.Url()">
+
+                            <div class="header">
+                                <img src="@image" alt="@item.Name()" />
+                                <h4>@item.Name()</h4>
+                                <span class="date">@createDate</span>
+                            </div>
+                        </a>
+
+                        <div>
+                            <p>@preamble</p>
+                            <a class="read-more" href="@item.Url()">Read more</a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <!-- Pagination -->
+            <div class="pagination">
+                @if (currentPage > 1)
+                {
+                    <a href="?page=@(currentPage - 1)" class="change"> PREV</a>
+                }
+                else
+                {
+                    <span class="change inactive">PREV</span>
+                }
+                <ul class="pages">
+                    @for (int i = 1; i < Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+                    {
+                        <li class="@((i == currentPage) ? "number active" : "number")">
+                            <a href="?page=@i">@i</a>
+                        </li>
+                    }
+
+                </ul>
+
+                @if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
+                {
+                    <a class="change" href="?page=@(currentPage + 1)">NEXT</a>
+                }
+                else
+                {
+                    <span class="change inactive">NEXT</span>
+                }
+            </div>
+        </div>
+        <aside class="sidebar">
+            <div class="recent-projects">
+                <h4>Recent Projects</h4>
+                <ul>
+                    @foreach (var project in recentProjects)
+                    {
+                        <li>
+                            <a href="@project.Url()">@project.Name</a>
+                            <span>@project.CreateDate.ToString("MMMM d, yyyy")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="tags">
+                <h4>Tags</h4>
+                <ul>
+                    @foreach (var tag in tags)
+                    {
+                        <li>@tag</li>
+                    }
+                </ul>
+            </div>
+            @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
+        </aside>
+    
+    </div>
+
+ 
+    
 </section>
+
+
+
 
 
 

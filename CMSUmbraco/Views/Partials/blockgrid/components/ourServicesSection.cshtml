@@ -28,17 +28,17 @@
                 @foreach (var item in selection)
                 {
                     var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
-                    var preamble = item?.Value<string>("serviceDescription") ?? "";
+                    var preamble = item?.Value<string>("preamble") ?? "";
 
                     <a href="@item!.Url()">
                         <div class="item">
-                            <div class="header">
+                            <div class="page-title">
                                 <h4>@item!.Name</h4>
                             </div>
                             <div class="body">
                                 <img src="@image" alt="@item!.Name" />
                             </div>
-                            <div class="footer">
+                            <div class="preamble">
                                 <p>@preamble</p>
                             </div>
                         </div>
