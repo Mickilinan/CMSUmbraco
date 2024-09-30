@@ -71,6 +71,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual bool CenterContentOnPage => this.Value<bool>(_publishedValueFallback, "centerContentOnPage");
 
 		///<summary>
+		/// Custom Class
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("customClass")]
+		public virtual string CustomClass => this.Value<string>(_publishedValueFallback, "customClass");
+
+		///<summary>
 		/// Section Background Color
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]

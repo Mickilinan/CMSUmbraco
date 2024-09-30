@@ -1,0 +1,32 @@
+﻿#why-choose-us {
+    
+    padding-top: 150px; 
+    padding-bottom: 0;
+    text-align: center; /* Centrera texten */
+}
+
+    #why-choose-us h2 {
+       
+        position: relative;
+        top: -60px; 
+    }
+
+
+
+    #why-choose-us .btn-primary {
+        display: inline-flex; 
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px; 
+        margin-bottom: 80px;
+    }
+
+
+
+    #why-choose-us .background-image {
+        background-size: cover;
+        background-position: center;
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+    }

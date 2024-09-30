@@ -81,7 +81,7 @@ a {
 
 .btn-primary {
     background-color: var(--color-primary);
-    color: var(--color-secondary);
+    color: var(--color-accent);
     border-color: var(--color-primary);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

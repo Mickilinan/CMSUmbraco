@@ -1,5 +1,5 @@
 ﻿#our-services {
-    background-color: var(--color-gray); /* Example background */
+    background-color: var(--color-gray); 
     padding: 60px 0;
 }
 
@@ -25,8 +25,8 @@
 
 .services {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Auto adjusts columns */
-    gap: 30px; /* Space between items */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px; 
     margin-top: 40px;
 }
 

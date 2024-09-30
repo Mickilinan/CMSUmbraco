@@ -6,6 +6,8 @@
     var sectionTitle = Model?.Content.Value<string>("sectionTitle") ?? "";
     var sectionId = sectionTitle?.ToString().ToLower().Trim().Replace(" ", "-");
 
+ 
+
     var spacingTopClass = (Model!.Content.Value<bool>("addSpaceToTop")) ? "spacing-top" : "";
     var spacingBottomClass = (Model!.Content.Value<bool>("addSpaceToBottom")) ? "spacing-bottom" : "";  
     var centerContentClass = (Model!.Content.Value<bool>("centerContentOnPage")) ? "center" : "";
@@ -17,23 +19,13 @@
 }    
 
 
-<section id="@sectionId" class="full-width-section @backgroundColorClass">
+<section id="@sectionId" class="full-width-section  @backgroundColorClass">
 
     @if (string.IsNullOrEmpty(backgroundColorClass))
     {
         <div class="background @backgroundColorClass"></div>
     }
 
-
-
-   @*  <div class="container @centerContentClass">
-
-    @if(!string.IsNullOrEmpty(sectionBackgroundImage))
-    {
-        <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
-    }
-        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
-    </div> *@
 
 
     @if (!string.IsNullOrEmpty(sectionBackgroundImage))
@@ -47,3 +39,13 @@
         @await Html.GetBlockGridItemAreasHtmlAsync(Model)
     </div>
 </section>
+
+
+@*  <div class="container @centerContentClass">
+
+    @if(!string.IsNullOrEmpty(sectionBackgroundImage))
+    {
+        <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+    }
+        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+    </div> *@
