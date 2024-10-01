@@ -1,4 +1,4 @@
-﻿@* @using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
@@ -16,8 +16,8 @@
         .Take(6);
 }
 
-<section id="our-projects" class="@backgroundColorClass">
-    <div class="container">
+<section id="our-projects" class="home-page @backgroundColorClass">
+    @* <div class="container"> *@
         <div class="headline">
             <h6 class="section-title">@sectionTitle</h6>
             <h2 class="title">@headline</h2>
@@ -32,26 +32,26 @@
 
                     <a href="@item!.Url()">
                         <div class="item">
-                            <div class="header">
+                            <div class="header-item">
                                 <h4>@item!.Name</h4>
+                                <p>Financial Services</p>
                             </div>
                             <div class="body">
                                 <img src="@image" alt="@item!.Name" />
                             </div>
-                            <div>
+                        <div class="arrow-icon">
+                          
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                            <div class="preamble">
                                 <p>@preamble</p>
                             </div>
                         </div>
                     </a>
                 }
 
-                <div class="pagination">
-                    <a href="#">Prev</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">Next</a>
-                </div>
+              
             }
         </div>
-    </div>
-</section> *@
+    @* </div> *@
+</section>

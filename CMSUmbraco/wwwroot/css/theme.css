@@ -7,7 +7,7 @@
     --color-secondary: #D9C3A9;
     --color-accent: #F2EDDC;
     --color-gray: #F7F7F7;
-    --color-darker-gray:#BBBBBB;
+    --color-darker-gray: #BBBBBB;
     --color-light: #FFFFFF;
     --color-border-dark: #333333;
     --color-border-dark-transparent: rgba(51, 51, 51, 0.10);
@@ -16,7 +16,8 @@
     --color-border-accent: #d5d1c2;
     --color-border-gray: #e3e3e3;
     --color-border-light: #eeeeee;
-    --color-border-light-transparent: rgba(255, 255, 255, 0.95)
+    --color-border-light-transparent: rgba(255, 255, 255, 0.95); 
+    --color-primary-rgb: 79, 89, 85;
 }
 
     :root.dark-theme {

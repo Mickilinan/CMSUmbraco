@@ -14,10 +14,11 @@
     var dynamicImageContainer = Model?.Content.Value<IPublishedContent>("dynamicImageContainer")?.Url() ?? null;
 }
 
-<div class="@backgroundColorClass @centerContentClass >
+<div class="@backgroundColorClass @centerContentClass" >
     
     @await Html.PartialAsync("blockgrid/Components/img")
     @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+</div>
 
 @if (!string.IsNullOrEmpty(sectionBackgroundImage))
 {
@@ -31,4 +32,4 @@
     <img class="background-image" src="@dynamicImageContainer" alt="@sectionTitle background image" />
 }
 
-</div>
+
