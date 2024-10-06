@@ -8,46 +8,31 @@
     position: relative;
     overflow: visible;
     background-image: url('/media/3hthkbd2/dot-map2.svg');
-    background-repeat: no-repeat; 
-   /* background-size: cover; */
-    background-position: center; 
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
     #success-story h2 {
         font-size: 36px;
         margin-bottom: 20px;
-        color: var(--color-light); 
+        color: var(--color-light);
     }
 
     #success-story h3 {
         font-size: 90px;
-        color: var(--color-secondary); 
-       
+        color: var(--color-secondary);
     }
 
-    #success-story p{
+    #success-story p {
         color: var(--color-light);
     }
 
 
 
-    #success-story .background-image {
-      /*  position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background-position: center;
-        background-size: cover;
-        z-index: 1;*/
-        /*opacity: 0.8; */
-    }
 
-  
 
-    #success-story img{
-        /* Styles for the second image (the main image) */
+
+    #success-story img {
         position: relative;
         margin-top: 30px;
         z-index: 1;

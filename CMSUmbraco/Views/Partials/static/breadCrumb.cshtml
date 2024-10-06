@@ -3,44 +3,54 @@
 @using Umbraco.Extensions
 
 @inject IPublishedUrlProvider PublishedUrlProvider
-@*
-    This snippet makes a breadcrumb of parents using an unordered HTML list.
 
-    How it works:
-    - It uses the Ancestors() method to get all parents and then generates links so the visitor can go back
-    - Finally it outputs the name of the current page (without a link)
-*@
 
-@{ 
-    var selection = Model.Ancestors().ToArray();
-    var homePageDisplayName = "home";
-    var isFirstItem = true;
+@{
+    var selection = Model.Ancestors().Where(x => x.Level > 1).Take(2).Reverse().ToArray();
+    var homePageDisplayName = "Home";
+    var totalItems = selection.Length + 1;
+    var currentItem = 0;
 
     var backgroundImage = Model.Value<IPublishedContent>("backgroundImage")?.Url();
 
 }
 
-<section class ="page-title" style="background-image: url('@backgroundImage');">
+<section class="page-title" style="background-image: url('@backgroundImage');">
     <div class="container">
 
         <h1>@ViewBag.Title</h1>
 
 
-        @if (selection?.Length > 0)
-{
-    <ul class="breadcrumb">
-        
-        @foreach (var item in selection.OrderBy(x => x.Level))
-        {
-            var displayName = isFirstItem ? homePageDisplayName : item.Name;
-            <li class="breadcrumb-item"><a href="@item.Url(PublishedUrlProvider)">@displayName</a> </li>
-            isFirstItem = false;
-        }
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("~/")">@homePageDisplayName</a></li>
 
-        
-        <li class="breadcrumb-item active">@Model.Name</li>
-    </ul>
-}
+            @if (selection.Length > 0 || !string.IsNullOrEmpty(Model.Name))
+            {
+                <span> > </span>
+            }
+
+            @for (var i = 0; i < selection.Length; i++)
+            {
+                var item = selection[i];
+                <li>
+                    <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                </li>
+
+                @if (i < selection.Length - 1)
+                {
+                    <span> > </span>
+                }
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Name))
+            {
+                @if (selection.Length > 0)
+                {
+                    <span> > </span>
+                }
+                <li class="active">@Model.Name</li>
+            }
+        </ul>
 
     </div>
 </section>    

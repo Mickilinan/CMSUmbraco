@@ -1,18 +1,19 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
 @{
+
+
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
     var officeLocation = settings?.Value<string>("officeLocation") ?? "";
     var officePhoneNumber = settings?.Value<string>("officePhoneNumber") ?? "";
     var officeEmailAddress = settings?.Value<string>("officeEmailAddress") ?? "";
-
 }
 
-<div id="letusknowsection" class="letusknow" >
+<div id="letusknowsection" class="letusknow">
     <div class="letusknow-container">
-        <div class="letusknow-image">           
+        <div class="letusknow-image">
             <img class="dots-background" src="/Images/Dotbg.svg" alt="Dots background">
             <img class="green-background" src="/Images/Bgletusknow1.svg" alt="Green background">
             <img class="man-image" src="/Images/themanletusknow.svg" alt="Smiling man with arms crossed">
@@ -21,15 +22,15 @@
             <h2>Let us know about your next project</h2>
             <ul class="contact-info">
                 <li>
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i class="fa-regular fa-location-dot"></i>
                     <div>
                         <span>Office location</span>
                         <p>@officeLocation</p>
                     </div>
-                   </li>
+                </li>
 
                 <li>
-                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-regular fa-phone"></i>
                     <div>
                         <span>Phone number</span>
                         <p>@officePhoneNumber</p>
@@ -37,7 +38,7 @@
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i class="fa-regular fa-envelope"></i>
                     <div>
                         <span>E-mail address</span>
                         <p>@officeEmailAddress</p>
@@ -45,8 +46,5 @@
                 </li>
             </ul>
         </div>
-       
-       
-      
     </div>
 </div>

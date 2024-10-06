@@ -11,19 +11,37 @@
     var onlineSupportText = settingsPage?.Value<string>("onlineSupportText") ?? "Default online support text";
     var supportEmail = settingsPage?.Value<string>("supportEmail") ?? "example@example.com";
 
+        bool.TryParse(TempData["error_email"]?.ToString()!, out bool error_email);
+
 
 }
 
+<div class="support-box">
+    <p class="headline">@supportText</p>
+    <p>@onlineSupportText</p>
 
-    <div class="support-box">
-        <p class="headline">@supportText</p>
-        <p>@onlineSupportText</p>
-        <form>
-            <div class="input-wrapper">
-                <input type="email" placeholder="Email address" value=@supportEmail />
-                <span class="icon"><i class="fas fa-envelope"></i></span>
+    @if (TempData["success"] != null && !string.IsNullOrEmpty(TempData["success"].ToString()))
+    {
+        <div class="success-message">@TempData["success"]</div>
+    }
+    else
+    {
+        @using (Html.BeginUmbracoForm("HandleSubmit", "SupportSurface", FormMethod.Post))
+        {
+            <div class="form-input-group">
+                <div class="input-wrapper">
+                    <input id="email" name="email" type="text" placeholder="Email address" class="form-input" value="@TempData["email"]" />
+                    <button type="submit" id="send-email" class="send-email-btn">
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+
+                @if (error_email)
+                {
+                    <span class="form-input-error form-invalid-input">You must enter a valid email address</span>
+                }
             </div>
-        </form>
-    </div>
-
+        }
+    }
+</div>
 

@@ -1,43 +1,97 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@model Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent
+
 @{
-	Layout = "mainLayout.cshtml";
+    Layout = "mainLayout.cshtml";
+
     ViewBag.Title = Model.Name;
 
+
+
     var recentProjects = Umbraco.Content(Guid.Parse("eae30c60-0864-440d-914e-9e47493f1367"))
+
         .ChildrenOfType("projectsItemTemplate")
+
         .OrderByDescending(x => x.CreateDate)
+
         .Take(5);
+
+
 
     var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
 
+
+
     var supportEmail = Model?.Value<string>("supportEmail") ?? "";
+
+
+
+    var tags = Model?.Value<IEnumerable<string>>("tags") ?? Enumerable.Empty<string>();
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Title))
+
+{
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
 }
 
 <section class="project-details">
-    <div class="container project-container">
+    <div class="project-details-container">
         <div class="main-content">
+            <div class="date-wrapper">
+                <i class="fa-regular fa-calendar-alt"></i>
+                <span class="date">September 19, 2024</span>
+            </div>
             @Model.Value("pageContent")
         </div>
+        <div class="vertical-divider-projects"> </div>
 
-      
         <aside class="sidebar">
-           
+
             <div class="recent-projects">
                 <h4>Recent Projects</h4>
                 <ul>
                     @foreach (var project in recentProjects)
+
                     {
+
+
+
+                        var thumbnail = project?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
                         <li>
-                            <a href="@project.Url()">@project.Name</a>
-                            <span>@project.CreateDate.ToString("MMMM d, yyyy")</span>
+                            <div class="recent-project-item">
+                                <a href="@project.Url()">
+                                    <img src="@thumbnail" alt="@project.Name" class="recent-project-thumbnail" />
+                                    <div class="project-info">
+
+                                        <h5>@project.Name</h5>
+
+                                        <span><i class="fa-regular fa-calendar-alt"> </i>@project.CreateDate.ToString("MMMM d, yyyy")</span>
+                                    </div>
+                                </a>
+                            </div>
                         </li>
                     }
                 </ul>
             </div>
+            <div class="tags-project-details">
+                <h4>Tags</h4>
+                <ul>
+                    @foreach (var tag in tags)
 
-           
-           @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
+
+
+                    {
+                        <li>@tag</li>
+                    }
+                </ul>
+            </div>
+
+            @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
         </aside>
+
     </div>
 </section>
+
+@await Html.PartialAsync("partials/blockgrid/components/letusknowsection")

@@ -1,56 +1,74 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "mainLayout.cshtml";
-	ViewBag.Title = Model?.Value("pageTitle") ?? null;
+    Layout = "mainLayout.cshtml";
 
-	var selection = Umbraco.Content(Guid.Parse("89c5dd10-50eb-4835-8fda-05b997be9228"))
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+
+
+    var selection = Umbraco.Content(Guid.Parse("89c5dd10-50eb-4835-8fda-05b997be9228"))
+
     .ChildrenOfType("serviceItemTemplate")
+
     .Where(x => x.IsVisible());
 }
 
 
-<section id="our-services">
-	<div class="container">
-		@if (!string.IsNullOrEmpty(Model.Value("customHeadline").ToString()))
-		{
-			<div class="headline">
-				<h2 class="title">@Model.Value("customHeadline")</h2>
-			</div>
-		}
-		<div class="services">
-			@foreach (var item in selection)
-			{
 
-				var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
-
-				var preamble = item?.Value<string>("preamble") ?? "";
-
-				<a href="@item.Url()">
-					<div class="item">
-						<div class="header">
-							<h4>@item.Name()</h4>
-						</div>
-						<div class="body">
-							<img src="@image" alt="@item.Name()">
-						</div>
-						<div class=preamble>
-							<p>@preamble</p>
-						</div>
-					</div>
-
-				</a>
+@if (Model != null && !string.IsNullOrEmpty(Model.Name))
 
 
-			}
-		</div>
-	</div>
+
+{
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+}
+
+<section id="our-services-list">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.Value("customHeadline").ToString()))
+
+        {
+            <div class="headline">
+                <h2 class="title">@Model.Value("customHeadline")</h2>
+            </div>
+        }
+        <div class="services">
+            @foreach (var item in selection)
+            {
+
+
+
+                var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+
+
+
+                var preamble = item?.Value<string>("preamble") ?? "";
+
+                <a href="@item.Url()">
+                    <div class="item">
+                        <div class="header">
+                            <h4>@item.Name()</h4>
+                        </div>
+                        <div class="body">
+                            <img src="@image" alt="@item.Name()">
+                        </div>
+                        <div class=preamble>
+                            <p>@preamble</p>
+                        </div>
+                    </div>
+
+                </a>
+
+
+            }
+        </div>
+    </div>
 
 </section>
 
-@* 
-@await Html.PartialAsync("partials/blocklist/serviceList", selection) *@
 
+@await Html.PartialAsync("partials/blockgrid/components/letusknowsection")
 
 
 

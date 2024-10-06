@@ -16,7 +16,7 @@
     --color-border-accent: #d5d1c2;
     --color-border-gray: #e3e3e3;
     --color-border-light: #eeeeee;
-    --color-border-light-transparent: rgba(255, 255, 255, 0.95); 
+    --color-border-light-transparent: rgba(255, 255, 255, 0.95);
     --color-primary-rgb: 79, 89, 85;
 }
 
@@ -57,7 +57,7 @@ a {
 
 
 
-/*Buttons colors   */ 
+/*Buttons colors   */
 
 .btn-dark {
     background-color: var(--color-dark);
@@ -207,11 +207,12 @@ a {
     }
 
 
-        /*Background colors */
+/*Background colors */
 
 .bg-dark {
     background-color: var(--color-dark);
 }
+
 .bg-primary {
     background-color: var(--color-primary);
 }
@@ -219,6 +220,7 @@ a {
 .bg-secondary {
     background-color: var(--color-secondary);
 }
+
 .bg-gray {
     background-color: var(--color-gray);
 }
@@ -262,8 +264,3 @@ h5 {
 h6 {
     color: var(--color-secondary)
 }
-
-
-
-
-

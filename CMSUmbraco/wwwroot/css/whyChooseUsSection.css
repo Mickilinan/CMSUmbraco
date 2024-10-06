@@ -1,23 +1,25 @@
 ﻿#why-choose-us {
-    
-    padding-top: 150px; 
+    padding-top: 150px;
     padding-bottom: 0;
-    text-align: center; 
+    text-align: center;
 }
 
+    #why-choose-us .container {
+        margin-bottom: -10px;
+    }
+
     #why-choose-us h2 {
-       
         position: relative;
-        top: -60px; 
+        top: -60px;
     }
 
 
 
     #why-choose-us .btn-primary {
-        display: inline-flex; 
+        display: inline-flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px; 
+        margin-top: 20px;
         margin-bottom: 80px;
     }
 

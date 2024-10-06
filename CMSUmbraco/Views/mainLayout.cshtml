@@ -11,9 +11,9 @@
     var siteTagline = settings?.Value<string>("siteTagline") ?? "Financial Solutions";
 
     var pageTitle = !string.IsNullOrEmpty(ViewBag.Title) ? $"{ViewBag?.Title} | {siteName} - {siteTagline}" : $"{siteName} - {siteTagline}";
-  
 
-    var isHomePage = Model.Key == new Guid("bb0e9897-5ff3-45ee-94d7-c74442c19ac1");
+
+
 
 }
 
@@ -26,27 +26,22 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/whyChooseUsSection.css">
-     <link rel="stylesheet" href="/css/letusknowsection.css">
+    <link rel="stylesheet" href="/css/letusknowsection.css">
     <link rel="stylesheet" href="/css/ourServicesSection.css">
     <link rel="stylesheet" href="/css/ourProjectsSection.css">
     <link rel="stylesheet" href="/css/successStory.css">
 
- 
-    <title>@pageTitle</title>
+
 </head>
 
 <body>
     <div class="wrapper">
         @await Html.PartialAsync("partials/static/topbar.cshtml")
         @await Html.PartialAsync("partials/static/header.cshtml")
-        <main>            
-                @RenderBody()                        
-        </main> 
+        <main>
+            @RenderBody()
+        </main>
 
-        @if (!isHomePage)
-        {
-            @await Html.PartialAsync("partials/static/letusknowsection.cshtml")
-        }  
 
     </div>
 

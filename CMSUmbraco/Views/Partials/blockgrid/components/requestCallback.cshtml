@@ -1,0 +1,76 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+
+@{
+    bool.TryParse(TempData["error_name"]?.ToString()!, out bool error_name);
+    bool.TryParse(TempData["error_email"]?.ToString()!, out bool error_email);
+    bool.TryParse(TempData["error_phone"]?.ToString()!, out bool error_phone);
+
+    var sectionTitle = Model.Content.Value<string>("sectionTitle") ?? "";
+    var preamble = Model.Content.Value<string>("preamble") ?? "";
+    var headline = Model.Content.Value<string>("headline") ?? "";
+}
+
+
+<section id="request-callback">
+    <div class="container big-form">
+        <div class="text">
+            <h3>@sectionTitle</h3>
+            <h2>@headline</h2>
+            <p>@preamble</p>
+        </div>
+        <div class="form-items">
+            @if (TempData["success"] != null && !string.IsNullOrEmpty(TempData["success"].ToString()))
+            {
+                <div class="success-message">@TempData["success"]</div>
+            }
+            else
+            {
+                @using (Html.BeginUmbracoForm("HandleSubmit", "RequestSurface", FormMethod.Post))
+                {
+                    <div class="form-input-group">
+                        <input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@TempData["name"]">
+                        @if (error_name)
+                        {
+                            <span class="form-input-error form-invalid-input">You must enter your name</span>
+                        }
+                    </div>
+
+                    <div class="form-input-group">
+                        <input id="email" name="email" type="text" placeholder="Email" class="form-input" value="@TempData["email"]">
+                        @if (error_email)
+                        {
+                            <span class="form-input-error form-invalid-input">You must enter your email</span>
+                        }
+                    </div>
+
+                    <div class="form-input-group">
+                        <input id="phone" name="phone" type="text" placeholder="Phone" class="form-input" value="@TempData["phone"]">
+                        @if (error_phone)
+                        {
+                            <span class="form-input-error form-invalid-input">You must enter your phone</span>
+                        }
+                    </div>
+
+                    <div class="form-input-group">
+                        <select id="dropdown" name="dropdown" class="form-input">
+                            <option value="option1">Financial Consulting</option>
+                            <option value="option2">Risk Management</option>
+                            <option value="option3">Assurance</option>
+                            <option value="option4">Head quarter</option>
+                            <option value="option5">Advice contact</option>
+                            <option value="option6">Free speach</option>
+                        </select>
+                    </div>
+
+
+                    <button type="submit" class="form-button btn-submit btn">Submit</button>
+
+                }
+            }
+        </div>
+    </div>
+</section>

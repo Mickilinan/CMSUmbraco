@@ -1,42 +1,59 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "mainLayout.cshtml";
+    Layout = "mainLayout.cshtml";
+
     ViewBag.Title = Model.Name;
 
-        var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
+
+
+    var supportText = Model?.Value<string>("supportText") ?? "Online support 24/7, we are here to help you";
+
+
 
     var supportEmail = Model?.Value<string>("supportEmail") ?? "";
+
+
+
+
+
+
+
+    var image = Umbraco.Media(Guid.Parse("bb54b0e2-0faf-4662-8528-c5d57bdd9075"));
 }
 
-@* <section class="service-details">
-    <div class="container">
-        <div class="servicesPage-Title">
-            <a href="@Model.Url()">@Model.Name</a>
-        </div>
-        @Model.Value("pageContent")
-    </div>
-</section> *@
+@if (!string.IsNullOrEmpty(ViewBag.Title))
+
+
+
+{
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+}
 
 <section class="service-details">
     <div class="container">
-        <div class="servicesPage-Title">
-            <a href="@Model.Url()">@Model.Name</a>
-        </div>
         <div class="content-wrapper">
-            <aside class="sidebar">
-                
+            <aside class="sidebar-services">
+
                 <div class="about-us">
-                   
-                    @Model.Value("sidebarContent")
+
+                    <h4>About us</h4>
+                    <img src="@image.Url()">
+                    <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non </p>
+                    @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
                 </div>
-                
-                @await Html.PartialAsync("Partials/Static/HowCanWeHelp")
+
+
             </aside>
+
+            <div class="vertical-divider-services"></div>
             <div class="content">
-                <!-- Huvudinnehåll för service-item -->
+
                 @Model.Value("pageContent")
             </div>
         </div>
     </div>
 </section>
+
+@await Html.PartialAsync("partials/static/serviceItemForm.cshtml")
+@await Html.PartialAsync("partials/blockgrid/components/letusknowsection")

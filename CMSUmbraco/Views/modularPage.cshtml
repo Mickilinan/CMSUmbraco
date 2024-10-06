@@ -7,26 +7,32 @@
 
     Layout = "mainLayout.cshtml";
 
+
+
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
-    var servicesPage = Model.Value<IPublishedContent>("contentPicker");   
+
+    var servicesPage = Model.Value<IPublishedContent>("contentPicker");
+
     var selection = servicesPage?.ChildrenOfType("serviceItemTemplate").Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
-    
+
 
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Title))
+
+
+
 {
-    <div class="page-title">@ViewBag.Title</div>
-    @await Html.PartialAsync("partials/static/breadCrumb.cshtml")
-    
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
 }
 
 
-    
-    @await Html.GetBlockGridHtmlAsync(Model!.Layout)
-    @await Html.GetBlockGridHtmlAsync(Model.LetUsKnowSection)
-    
-    @* @await Html.PartialAsync("partials/static/ContactForm.cshtml") *@
-    @* @await Html.PartialAsync("partials/blocklist/ServiceList", selection) *@
+
+
+@await Html.GetBlockGridHtmlAsync(Model!.Layout)
+
+
+
+
 
 

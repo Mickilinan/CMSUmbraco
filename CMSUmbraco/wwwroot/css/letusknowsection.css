@@ -2,9 +2,12 @@
     padding: 0;
     background-color: #f7f7f7;
     position: relative;
-    /*overflow: visible;*/
     height: 713px;
 }
+
+    #letusknowsection.custom-background {
+        background-color: transparent !important;
+    }
 
 .letusknow-container {
     display: flex;
@@ -20,12 +23,10 @@
 
 .letusknow-image {
     flex: 1;
-    display:flex;
+    display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-  /*  max-width: 50%;*/
     position: relative;
-   /* z-index: 1;*/
 }
 
 
@@ -53,8 +54,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-   /* margin-left: 20px;*/
-    /*left: 20px;*/
     width: 485px;
     height: 676px;
     z-index: 3;
@@ -63,7 +62,6 @@
 .letusknow-info {
     flex: 1;
     padding-top: 170px;
-    /*position: relative;*/
     z-index: 4;
 }
 
@@ -87,7 +85,6 @@
         margin-bottom: 15px;
         display: flex;
         align-items: flex-start;
-        /*flex-direction: column;*/
         gap: 10px;
     }
 
@@ -101,10 +98,11 @@
             font-weight: 700;
             color: #4F5955;
         }
+
         .contact-info li p {
-            margin: 0; 
+            margin: 0;
             color: #535656;
-            font-weight: 400; 
+            font-weight: 400;
         }
 
         .contact-info li div {
@@ -112,26 +110,26 @@
             flex-direction: column;
         }
 
-            @media (max-width: 768px) {
-                .letusknow-container {
-                    flex-direction: column;
-                    text-align: center;
-                }
+@media (max-width: 768px) {
+    .letusknow-container {
+        flex-direction: column;
+        text-align: center;
+    }
 
-                .letusknow-image, .letusknow-info {
-                    max-width: 100%;
-                    padding-left: 0;
-                }
+    .letusknow-image, .letusknow-info {
+        max-width: 100%;
+        padding-left: 0;
+    }
 
-                    .letusknow-info h2 {
-                        font-size: 28px;
-                    }
+        .letusknow-info h2 {
+            font-size: 28px;
+        }
 
-                .contact-info li {
-                    font-size: 16px;
-                }
+    .contact-info li {
+        font-size: 16px;
+    }
 
-                    .contact-info li i {
-                        font-size: 20px;
-                    }
-            }
+        .contact-info li i {
+            font-size: 20px;
+        }
+}

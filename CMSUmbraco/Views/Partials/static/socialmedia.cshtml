@@ -5,11 +5,11 @@
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
     var socialMediaPlatforms = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("socialMediaPlatforms") ?? null;
-    
-    
+
+
 }
 
-@if(socialMediaPlatforms != null)
+@if (socialMediaPlatforms != null)
 {
     <div class="socialmedia">
         @foreach (var social in socialMediaPlatforms)
@@ -17,23 +17,21 @@
             var platformName = social?.Content?.Value<string>("platformName");
             var platformAccountUrl = social?.Content?.Value<string>("platformAccountUrl");
 
-                switch(platformName.ToLower()){
-                    case "facebook":
+            switch (platformName.ToLower())
+            {
+                case "facebook":
                     <a href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"> <i class="fa-brands fa-facebook-f"></i></a>
                     break;
 
-                     case "x":
+                case "x":
                     <a href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"> <i class="fa-brands fa-x-twitter"></i></a>
                     break;
 
-                     case "linkedin":
+                case "linkedin":
                     <a href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"> <i class="fa-brands fa-linkedin"></i></a>
                     break;
 
-
-
-
-                }    
+            }
         }
-     </div>   
+    </div>
 }
